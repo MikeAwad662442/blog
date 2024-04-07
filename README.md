@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+---
+author: "Mike Awad"
+---
+# Project Blog Website
 
-## Getting Started
+Library I use in this project
 
-First, run the development server:
+* Next.Js
+* react-icons
+* @clerk/nextjs => add authentication and user management to your Next.js application. Add sign up, sign in, and profile management
+* date-fns  => simple and consistent toolset for manipulating JavaScript dates in a browser & Node.js
+* nanoid => unique string ID generator for JavaScript
+* markdown-draft-js + react-markdown
+* react-draft-wysiwyg => A Wysiwyg editor built using ReactJS and DraftJS libraries
+* @vercel/blob => The Vercel Blob JavaScript API client.
+* @prisma/client => Prisma Client JS is an auto-generated query builder that enables type-safe database access and reduces boilerplate
+* react-hook-form => build Form
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## dependencies Libraries
+
+```js
+npm i prisma @prisma/client @vercel/blob react-draft-wysiwyg markdown-draft-js react-markdown nanoid date-fns @clerk/nextjs react-hook-form
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## devDependencies Libraries
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```js
+npm i -D @types/markdown-draft-js @types/react-draft-wysiwyg eslint-config-prettier prettier prettier-plugin-tailwindcss
+```
