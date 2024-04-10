@@ -63,14 +63,14 @@ const JobListItem = ({
             {relativeDate(createdAt)}
           </p>
         </div>
-        {/* Show in big screens */}
-        <div className="hidden shrink-0 flex-col items-end justify-between sm:flex">
-          <Badge>{type}</Badge>
-          <span className="flex items-center gap-1.5 text-muted-foreground">
-            <Clock size={16} />
-            {relativeDate(createdAt)}
-          </span>
-        </div>
+      </div>
+      {/* Show in big screens */}
+      <div className="hidden shrink-0 flex-col items-end justify-between sm:flex">
+        <Badge>{type}</Badge>
+        <span className="flex items-center gap-1.5 text-muted-foreground">
+          <Clock size={16} />
+          {relativeDate(createdAt)}
+        </span>
       </div>
     </article>
   );
