@@ -3,30 +3,33 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import Select from "./ui/select";
 import { Button } from "./ui/button";
-import { jobFilterSchema } from "@/lib/validation";
+import { jobFilterSchema, JobFilterValue } from "@/lib/validation";
 import { redirect } from "next/navigation";
+import FormSubmitButton from "./FormSubmitButton";
+interface JobFilterSidebarProps {
+  defaultValue: JobFilterValue;
+}
 
 // Post database
 const FilterJobs = async (formData: FormData) => {
   "use server";
 
   const values = Object.fromEntries(formData.entries()); // transfer FormatData to Object
-  const { search, type, location, remote } = jobFilterSchema.parse(values); // to check entry data with Zod
+  const { searchInput, type, location, remote } = jobFilterSchema.parse(values); // to check entry data with Zod
   const searchParams = new URLSearchParams({
     // ...( if defined then send data )
-    ...(search && { search: search.trim() }), // .trim() To remove whitespace from both ends
+    ...(searchInput && { searchInput: searchInput.trim() }), // .trim() To remove whitespace from both ends
     ...(type && { type }),
     ...(location && { location }),
     ...(remote && { remote: "true" }),
   });
   // to send post in url link
   redirect(`/?${searchParams.toString()}`);
-  // console.log(formData);
 };
 // Post database
 // *************
 // Import Data from database
-const JobFilterSidebar = async (formData: FormData) => {
+const JobFilterSidebar = async ({ defaultValue }: JobFilterSidebarProps) => {
   const haveLocation = (await prisma?.job
     .findMany({
       where: { approved: true },
@@ -42,16 +45,21 @@ const JobFilterSidebar = async (formData: FormData) => {
       <form action={FilterJobs}>
         <div className="space-y-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="search">Search</Label>
+            <Label htmlFor="searchInput">Search</Label>
             <Input
-              id="search"
-              name="search"
+              id="searchInput"
+              name="searchInput"
               placeholder="Title, Company, etc..."
+              defaultValue={defaultValue.searchInput}
             />
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="type">type</Label>
-            <Select id="type" name="type" defaultValue="">
+            <Select
+              id="type"
+              name="type"
+              defaultValue={defaultValue.type || ""}
+            >
               <option value="">type fo work</option>
               {jobTypes.map((type) => (
                 <option key={type} value={type}>
@@ -62,7 +70,11 @@ const JobFilterSidebar = async (formData: FormData) => {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="location">Location</Label>
-            <Select id="location" name="location" defaultValue="">
+            <Select
+              id="location"
+              name="location"
+              defaultValue={defaultValue.location || ""}
+            >
               <option value="">All Location</option>
               {haveLocation.map((location) => (
                 <option key={location} value={location}>
@@ -77,12 +89,14 @@ const JobFilterSidebar = async (formData: FormData) => {
               name="remote"
               type="checkbox"
               className="scale-125 accent-black"
+              defaultChecked={defaultValue.remote}
             />
             <Label htmlFor="remote">Remote jobs</Label>
           </div>
-          <Button type="submit" className="w-full">
+          <FormSubmitButton className="w-full">Filter jobs</FormSubmitButton>
+          {/* <Button type="submit" className="w-full">
             find my jobs
-          </Button>
+          </Button> */}
         </div>
       </form>
     </aside>
