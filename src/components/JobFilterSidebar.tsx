@@ -42,7 +42,8 @@ const JobFilterSidebar = async ({ defaultValue }: JobFilterSidebarProps) => {
 
   return (
     <aside className="sticky top-0 h-fit rounded-lg border bg-background p-4 md:w-[260px]">
-      <form action={FilterJobs}>
+      <form action={FilterJobs} key={JSON.stringify(defaultValue)}>
+        {/* key={JSON.stringify(defaultValue)} to restart the value in the form if link is change or go to another link  */}
         <div className="space-y-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="searchInput">Search</Label>
