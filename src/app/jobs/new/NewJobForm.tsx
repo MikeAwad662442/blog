@@ -20,6 +20,8 @@ import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor";
 import { draftToMarkdown } from "markdown-draft-js";
 import LoadingButton from "@/components/LoadingButton";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const NewJobForm = () => {
   // ***********************
@@ -42,6 +44,7 @@ const NewJobForm = () => {
     formState: { isSubmitting },
   } = formCheck;
   // ***********************
+
   // ***********************
   // ***********************
   // ***********************
@@ -133,7 +136,10 @@ const NewJobForm = () => {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         fieldValues.onChange(file);
+                        console.log("Full Value : ", file);
+                        console.log("fieldValues : ", fieldValues.ref);
                       }}
+                      // ref={fieldValues.ref}
                     />
                   </FormControl>
                   <FormMessage />
@@ -154,7 +160,7 @@ const NewJobForm = () => {
                       onChange={(e) => {
                         field.onChange(e);
                         if (e.currentTarget.value === "Remote") {
-                          trigger("location");
+                          trigger("location"); // in this way the location np active
                         }
                       }}
                     >

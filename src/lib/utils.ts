@@ -19,4 +19,12 @@ const relativeDate = (from: Date) => {
   return formatDistanceToNowStrict(from, { addSuffix: true });
 };
 
-export { FormatMony, relativeDate };
+// For link of the job
+const toSlug = (str: string) => {
+  return str
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
+};
+
+export { FormatMony, relativeDate, toSlug };
