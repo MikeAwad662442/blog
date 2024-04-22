@@ -47,16 +47,14 @@ const locationSchema = z
   );
 // ***********************
 // for checked file insert
-const companyLogoSchema = z
-  .custom<File | undefined>()
-  .refine((file) => {
-    // check if the upload & the File type is Image
-    return !file || (file instanceof File && file.type.startsWith("image/"));
-  }, "Must be an image file")
-  .refine((file) => {
-    // check the File size not biggest than 2MB
-    return !file || file.size < 1024 * 1024 * 2;
-  }, "File must be less than 2MB");
+const companyLogoSchema = z.custom<File | undefined>().refine((file) => {
+  // check if the upload & the File type is Image
+  return !file || (file instanceof File && file.type.startsWith("image/"));
+}, "Must be an image file");
+// .refine((file) => {
+//   // check the File size not biggest than 2MB
+//   return !file || file.size < 1024 * 1024 * 2;
+// }, "File must be less than 2MB");
 // for checked file insert
 // ***********************
 export const createJobSchema = z

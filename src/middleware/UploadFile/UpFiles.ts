@@ -1,7 +1,6 @@
 // ===================== //
 // ==== Upload Files === //
 // ===================== //
-import multer from "multer";
 import path from "path";
 import sharp from "sharp"; // === For Comprise Images
 import fs from "fs";
@@ -55,24 +54,21 @@ function DeleteIMG(imgDelete: string) {
 // ========================================================= //
 // .split(path.sep); // Get PATH & Split To ARRAY
 // function fileDB(fileReQ: any, bodyREQ: any, imgType: string) {
-function fileDB(fileReQ: any, bodyREQ: any, imgType: any) {
+const fileDB = async (fileReQ: any, bodyREQ: any, imgType: any) => {
   // // === Console LOG === //
   // console.log("IMG DB:", fileReQ);
   // console.log("imgType", imgType);
   // console.log("bodyREQ", bodyREQ);
   // // === Console LOG === //
-
+  let NewFile;
   var type = imgType;
-  storage(fileReQ, bodyREQ).then((value) => {
+  await storage(fileReQ, bodyREQ).then((value) => {
     if (value !== undefined) {
       const webp: any = value.split(".").shift(); // Get Name & Split To ARRAY // [1645211075347 ,png] // then remove the type of image
-
       const IMGwebp = `1${webp}.webp`; // make image type WEBP
-      console.log("Test 3", IMGwebp);
       // === Resize IMAGES === //
       if (type === "image") {
-        // var NewIMG = `${LinkDB}/${IMGwebp}`; // Send the Path\image to DB
-        var NewIMG = `${IMGwebp}`; // Send the Path\image to DB
+        NewFile = `${IMGwebp}`; // Get image
         sharp(`${LinkServer}/${value}`)
           .webp()
           // === Upload IMAGE to File === //
@@ -90,7 +86,6 @@ function fileDB(fileReQ: any, bodyREQ: any, imgType: any) {
             }
           });
         // === Upload IMAGE to File === //
-        return NewIMG; // Send the Path\image to DB
       } else {
         // return `${LinkDB}/${value}`; // if Upload File id VIDEO Send the Path\image to DB
         return `${value}`; // if Upload File id VIDEO Send the Path\image to DB
@@ -105,7 +100,14 @@ function fileDB(fileReQ: any, bodyREQ: any, imgType: any) {
     //   return value;
     // }
   });
-}
+
+  /**********************
+   * Send the Path/image to DB
+   * Notes: Because "public" is a global file, we should only send the internal "gallery" file to DB
+   * const LinkServer = "./public/gallery";
+   **********************/
+  return `/gallery/${NewFile}`;
+};
 // === EXPORT === //
 // export {publicFile, IMGup, fileUp, DeleteIMG, fileDB, DeleteResize,tempFile };
 export { DeleteIMG, fileDB };
