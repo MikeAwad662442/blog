@@ -35,7 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# the security key
-.env
+# # the security key
+# .env
 # DataBase
-/db/
+/public/db
+
+/public/gallery

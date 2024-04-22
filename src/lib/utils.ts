@@ -23,7 +23,7 @@ const relativeDate = (from: Date) => {
 const toSlug = (str: string) => {
   return str
     .toLowerCase()
-    .replace(/ /g, "-")
+    .replace(/ /g, "-") // to remove all spaces from link
     .replace(/[^\w-]+/g, "");
 };
 

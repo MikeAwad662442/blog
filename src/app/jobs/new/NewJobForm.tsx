@@ -23,6 +23,8 @@ import LoadingButton from "@/components/LoadingButton";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { createJobPosting } from "./action";
+
 const NewJobForm = () => {
   // ***********************
   // to check Resolve data form by zod
@@ -31,7 +33,18 @@ const NewJobForm = () => {
   });
   // ***********************
   async function onSubmit(values: CreateJobValues) {
-    alert(JSON.stringify(values, null, 2));
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      if (value) {
+        formData.append(key, value);
+      }
+    });
+
+    try {
+      await createJobPosting(formData);
+    } catch (error) {
+      alert("Something went wrong, please try again.");
+    }
   }
   // ***********************
   const {
