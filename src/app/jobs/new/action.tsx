@@ -62,7 +62,7 @@ export const createJobPosting = async (formData: FormData) => {
       applicationUrl: applicationUrl?.trim(),
       description: description?.trim(),
       salary: parseInt(salary),
-      approved: true,
+      // approved: true, // in the project, the approval for new jobs comes from the admin
     },
   });
 
