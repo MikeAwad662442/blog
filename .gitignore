@@ -36,7 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 # # the security key
-# .env
+.env
 # DataBase
 /public/db
 
