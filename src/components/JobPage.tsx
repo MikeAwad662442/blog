@@ -4,7 +4,7 @@ import { Banknote, Briefcase, Globe2, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "./Markdown";
-
+import companyLogoPlaceholder from "@/assets/company-logo-placeholder.png";
 interface JobPageProps {
   job: Job;
 }
@@ -27,7 +27,11 @@ export default function JobPage({
       <div className="flex items-center gap-3">
         {companyLogoUrl && (
           <Image
-            src={companyLogoUrl}
+            src={
+              companyLogoUrl
+                ? `/gallery/${companyLogoUrl}`
+                : companyLogoPlaceholder
+            }
             alt="Company logo"
             width={100}
             height={100}

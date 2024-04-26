@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: "Job Blog",
     template: "%s | Job Blog",
   },
-  description: "Find Job you like ",
+  description: "Find Job you like",
 };
 
 export default function RootLayout({

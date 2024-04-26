@@ -36,7 +36,7 @@ const storage = async (NewFile: string, FullFile: File) => {
 // ==== Delete IMG ==== //
 function DeleteIMG(imgDelete: string) {
   const path = `${LinkServer}/${imgDelete}`;
-  // const path = `./public${imgDelete}`;
+  // const path = `./public/gallery/${imgDelete}`;
   try {
     fs.unlinkSync(path); //file removed
   } catch (err) {
@@ -64,7 +64,7 @@ const fileDB = async (fileReQ: any, bodyREQ: any, imgType: any) => {
   var type = imgType;
   await storage(fileReQ, bodyREQ).then((value) => {
     if (value !== undefined) {
-      const webp: any = value.split(".").shift(); // Get Name & Split To ARRAY // [1645211075347 ,png] // then remove the type of image
+      const webp: any = value.split(".").shift(); // Get Name & Split To ARRAY {{{ [1645211075347 ,png] }} then remove the type of image
       const IMGwebp = `1${webp}.webp`; // make image type WEBP
       // === Resize IMAGES === //
       if (type === "image") {
@@ -106,7 +106,8 @@ const fileDB = async (fileReQ: any, bodyREQ: any, imgType: any) => {
    * Notes: Because "public" is a global file, we should only send the internal "gallery" file to DB
    * const LinkServer = "./public/gallery";
    **********************/
-  return `/gallery/${NewFile}`;
+  // return `/gallery/${NewFile}`;
+  return `${NewFile}`;
 };
 // === EXPORT === //
 // export {publicFile, IMGup, fileUp, DeleteIMG, fileDB, DeleteResize,tempFile };
