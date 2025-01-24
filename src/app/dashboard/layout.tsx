@@ -1,6 +1,7 @@
 // src/Middleware.ts watch this Layout
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import AdminNavbar from "./AdminNavbar";
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Dashboard",
@@ -13,7 +14,7 @@ const layout = ({
 }>) => {
   return (
     <ClerkProvider>
-      {/* <AdminNavbar /> */}
+      <AdminNavbar />
       {children}
     </ClerkProvider>
   );

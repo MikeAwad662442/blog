@@ -63,6 +63,7 @@ const NewJobForm = () => {
   // ***********************
   return (
     <main className="m-auto my-10 max-w-3xl space-y-10">
+      {/* <p>{JSON.stringify(formCheck.getValues())}</p> */}
       <div className="space-y-5 text-center">
         <h1 className="H1">Find your perfect developer</h1>
         <p className="text-muted-foreground">
